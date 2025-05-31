@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soldadinho-do-araripe</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+
+<body>
+    <header class="header_azul">
+        <h1>Soldadinho-do-araripe</h1>
+        <p>Essa pequena ave é uma das mais raras da Caatinga, sendo criticamente ameaçada e endêmica de uma área restrita do Ceará. Sua sobrevivência depende da conservação de seu habitat específico.</p>
+    </header>
+    <main>
+        <section>
+            <model-viewer src="/img/soldadinho-do-araripe/soldadinho-do-araripe.glb" alt="Soldadinho-do-araripe 3D" auto-rotate
+                camera-controls ar shadow-intensity="1" style="width: 80%; height: 500px;"></model-viewer>
+            <p><strong>Nome comum:</strong> Soldadinho-do-araripe</p>
+            <p><strong>Nome científico:</strong> <i>Antilophia bokermanni</i></p>
+            <p><strong>Classificação Taxonômica:</strong> Reino: Animalia, Filo: Chordata, Classe: Aves, Ordem: Passeriformes, Família: Pipridae, Gênero: Antilophia, Espécie: *Antilophia bokermanni*</p>
+            <p><strong>Tempo de vida médio na natureza:</strong> Não disponível nos dados fornecidos (estimativa geral para passeriformes pequenos pode ser 5-10 anos)</p>
+            <p><strong>Tamanho:</strong> Aproximadamente 14,5 cm de comprimento</p>
+            <p><strong>Peso:</strong> Cerca de 20 g</p>
+            <p><strong>Status de ameaça:</strong> Criticamente em Perigo (CR)</p>
+            <p><strong>Tendência populacional:</strong> Em declínio acentuado</p>
+        </section>
+
+        <section>
+            <div id="map"></div>
+
+            <footer>
+                <p>Fonte: ICMBio, Esri, OpenStreetMap</p>
+            </footer>
+
+            <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+            <script>
+                // Camada de satélite (Esri)
+                const satelite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+                    attribution: 'Imagens © Esri',
+                    maxZoom: 18
+                });
+
+                // Camada padrão de ruas (OpenStreetMap)
+                const ruas = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© OpenStreetMap contributors',
+                    maxZoom: 19
+                });
+
+                // Inicializa o mapa com camada de satélite
+                const map = L.map('map', {
+                    center: [-7.55, -40.0], // Coordenadas aproximadas da Chapada do Araripe, Ceará
+                    zoom: 11,
+                    layers: [satelite] // camada padrão inicial
+                });
+
+                // Controle para alternar entre camadas
+                const baseMaps = {
+                    "Satélite (Esri)": satelite,
+                    "Mapa de Ruas (OSM)": ruas
+                };
+
+                L.control.layers(baseMaps).addTo(map);
+
+                // Adiciona o GeoJSON da área protegida do Soldadinho-do-araripe
+                fetch('/mapas/soldadinho_do_araripe.json') // Assumindo que você terá um arquivo GeoJSON para ele
+                    .then(res => res.json())
+                    .then(data => {
+                        L.geoJSON(data, {
+                            style: {
+                                color: '#CC0000', // Cor para a área de ocorrência
+                                fillColor: '#CC0000',
+                                fillOpacity: 0.3,
+                                weight: 2
+                            }
+                        }).addTo(map).bindPopup("Área de ocorrência do Soldadinho-do-araripe");
+                    })
+                    .catch(error => console.error('Erro ao carregar GeoJSON do Soldadinho-do-araripe:', error));
+            </script>
+
+        </section>
+
+        <section>
+            <h2>Descrição</h2>
+            <p>O Soldadinho-do-araripe (*Antilophia bokermanni*) é uma espécie de ave passarinho rara e endêmica do Brasil, encontrada exclusivamente nas fontes e nascentes da região da Chapada do Araripe, no sul do Ceará. É facilmente reconhecido pelo vibrante topete vermelho no macho adulto, que lembra um capacete de soldado, enquanto a fêmea e os jovens são predominantemente esverdeados. Habita as florestas úmidas, conhecidas como "brejos de altitude", que são verdadeiros oásis de vegetação em meio à Caatinga semiárida.</p>
+        </section>
+        <section>
+            <h2>Alimentação</h2>
+            <p>A dieta do Soldadinho-do-araripe consiste principalmente de frutos e insetos. Ele se alimenta de frutas de diversas espécies arbóreas e arbustivas presentes em seu habitat, como as figueiras (Ficus), além de buscar insetos, o que o torna um dispersor de sementes e um controlador natural de pragas em seu ecossistema.</p>
+        </section>
+        <section>
+            <h2>Conservação</h2>
+            <p>
+                O Soldadinho-do-araripe está classificado como **Criticamente em Perigo (CR)** de extinção, refletindo a urgência de sua conservação. A principal ameaça à sua sobrevivência é a degradação e perda de seu habitat específico, os brejos de altitude, devido à expansão urbana, agricultura e uso inadequado dos recursos hídricos.
+            </p>
+            <h3>Projetos e Iniciativas de Conservação:</h3>
+            <ul>
+                <li>**Plano de Ação Nacional (PAN) para a Conservação dos Cotingídeos e Papagaios-do-nordeste (ICMBio):** Este plano abrange o Soldadinho-do-araripe e visa a recuperação da espécie.</li>
+                <li>**Associação de Pesquisa e Preservação de Ecossistemas Aquáticos (AQUASIS):** Atua diretamente na Chapada do Araripe, com programas de pesquisa, proteção de fontes de água e educação ambiental focados na espécie.</li>
+                <li>**Parque Nacional do Araripe:** A proteção da área dentro do parque é fundamental para a sobrevivência do soldadinho, mas ainda enfrenta desafios de fiscalização e manejo.</li>
+            </ul>
+        </section>
+
+        <section>
+            <section class="galeria">
+                <img id="imggrande" class="imggrande" src="/img/soldadinho-do-araripe/img01.jpg"
+                    alt="Imagem destacada do Soldadinho-do-araripe" />
+                <div class="imgpequenas">
+                    <img src="/img/soldadinho-do-araripe/img01.jpg" alt="Soldadinho-do-araripe 1" />
+                    <img src="/img/soldadinho-do-araripe/img02.jpg" alt="Soldadinho-do-araripe 2" />
+                    <img src="/img/soldadinho-do-araripe/img03.jpg" alt="Soldadinho-do-araripe 3" />
+                    <img src="/img/soldadinho-do-araripe/img04.jpg" alt="Soldadinho-do-araripe 4" />
+                    <img src="/img/soldadinho-do-araripe/img05.jpg" alt="Soldadinho-do-araripe 5" />
+                    <img src="/img/soldadinho-do-araripe/img06.jpg" alt="Soldadinho-do-araripe 6" />
+                    <img src="/img/soldadinho-do-araripe/img07.jpg" alt="Soldadinho-do-araripe 7" />
+                    <img src="/img/soldadinho-do-araripe/img08.jpg" alt="Soldadinho-do-araripe 8" />
+                </div>
+            </section>
+        </section>
+
+        <script>
+            const featured = document.getElementById("imggrande");
+            const thumbs = document.querySelectorAll(".imgpequenas img");
+
+            thumbs.forEach((thumb) => {
+                thumb.addEventListener("click", () => {
+                    // Ajuste o padrão de substituição se necessário para suas imagens
+                    featured.src = thumb.src.replace(/\/160\/120/, "/800/600");
+                    featured.scrollIntoView({ behavior: "smooth", block: "center" });
+                });
+            });
+        </script>
+
+    </main>
+    <footer>
+        <p>Fontes: <a href="https://www.wikiaves.com.br/wiki/soldadinho-do-araripe" target="_blank">Wikiaves</a> | <a href="https://www.gov.br/icmbio/pt-br/assuntos/biodiversidade/pan/pan-cotingideos-e-papagaios-do-nordeste/sumario-pan-cotingideos-e-papagaios-do-nordeste.pdf" target="_blank">ICMBio (PAN)</a> | <a href="https://aquasis.org/projetos/soldadinho-do-araripe/" target="_blank">AQUASIS</a></p>
+        <p>Links dos projetos de conservação podem ser encontrados no texto acima e nas fontes citadas.</p>
+    </footer>
+</body>
+
+</html>

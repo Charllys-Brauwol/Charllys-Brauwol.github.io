@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ararinha-azul</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+
+<body>
+    <header class="header_azul">
+        <h1>Ararinha-azul</h1>
+        <p>Considerada extinta na natureza por muitos anos, a Ararinha-azul é um ícone da Caatinga, sendo objeto de intensos esforços de reintrodução para garantir seu retorno ao habitat natural.</p>
+    </header>
+    <main>
+        <section>
+            <model-viewer src="/img/ararinhasazuis/ararinhaparada.glb" alt="Ararinha-azul 3D" auto-rotate
+                camera-controls ar shadow-intensity="1" style="width: 80%; height: 500px;"></model-viewer>
+            <p><strong>Nome comum:</strong> Ararinha-azul</p>
+            <p><strong>Nome científico:</strong> <i>Cyanopsitta spixii</i></p>
+            <p><strong>Classificação Taxonômica:</strong> Reino: Animalia, Filo: Chordata, Classe: Aves, Ordem: Psittaciformes, Família: Psittacidae, Gênero: Cyanopsitta, Espécie: *C. spixii*</p>
+            <p><strong>Tempo de vida médio na natureza:</strong> Cerca de 40 anos na natureza e 27 anos em cativeiro</p>
+            <p><strong>Tamanho:</strong> A ararinha-azul possui comprimento do corpo entre 55-57 cm</p>
+            <p><strong>Peso:</strong> O peso da ararinha-azul em cativeiro varia entre 286-410 gramas</p>
+            <p><strong>Status de ameaça:</strong> Criticamente em Perigo (CR)</p>
+            <p><strong>Tendência populacional:</strong> Em aumento (devido a programas de reintrodução), mas extinta na natureza por muitos anos.</p>
+        </section>
+
+        <section>
+            <div id="map"></div>
+
+            <footer>
+                <p>Fonte: ICMBio, Esri, OpenStreetMap</p>
+            </footer>
+
+            <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+            <script>
+                // Camada de satélite (Esri)
+                const satelite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+                    attribution: 'Imagens © Esri',
+                    maxZoom: 18
+                });
+
+                // Camada padrão de ruas (OpenStreetMap)
+                const ruas = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© OpenStreetMap contributors',
+                    maxZoom: 19
+                });
+
+                // Inicializa o mapa com camada de satélite
+                const map = L.map('map', {
+                    center: [-9.18, -39.80], // Ajustado para uma área relevante da Caatinga, próxima ao habitat histórico da ararinha-azul
+                    zoom: 10,
+                    layers: [satelite] // camada padrão inicial
+                });
+
+                // Controle para alternar entre camadas
+                const baseMaps = {
+                    "Satélite (Esri)": satelite,
+                    "Mapa de Ruas (OSM)": ruas
+                };
+
+                L.control.layers(baseMaps).addTo(map);
+
+                // Adiciona o GeoJSON da área protegida da Ararinha-azul
+                fetch('/mapas/ararinha_azul.json') // Já estava correto
+                    .then(res => res.json())
+                    .then(data => {
+                        L.geoJSON(data, {
+                            style: {
+                                color: '#005a9c',
+                                fillColor: '#005a9c',
+                                fillOpacity: 0.3,
+                                weight: 2
+                            }
+                        }).addTo(map).bindPopup("Área de ocorrência/reintrodução da Ararinha-azul");
+                    });
+            </script>
+
+        </section>
+
+        <section>
+            <h2>Descrição</h2>
+            <p>A Ararinha-azul (*Cyanopsitta spixii*) é uma ave icônica e endêmica do bioma Caatinga, no Brasil, especialmente da região da Bahia. Conhecida por sua plumagem azul vibrante, bico grande e forte, e cauda longa, é uma das espécies de papagaio mais raras do mundo. Por muitos anos, foi considerada extinta na natureza devido à perda de habitat e, principalmente, à captura para o comércio ilegal de animais de estimação. Esforços intensos de conservação e programas de reprodução em cativeiro resultaram em recentes reintroduções na natureza, marcando um passo crucial para sua recuperação.
+            </p>
+        </section>
+        <section>
+            <h2>Alimentação</h2>
+            <p>A dieta da Ararinha-azul na natureza é altamente especializada, baseando-se principalmente em sementes de licuri (*Syagrus coronata*), uma palmeira nativa da Caatinga. Também se alimenta de outras sementes, frutos e flores disponíveis em seu habitat. A dependência do licuri torna a conservação dessa palmeira crucial para a sobrevivência da ararinha.</p>
+        </section>
+        <section>
+            <h2>Conservação</h2>
+            <p>
+                A Ararinha-azul está classificada como **Criticamente em Perigo (CR)**. Seus principais fatores de ameaça incluíram a destruição do habitat natural, o tráfico de animais silvestres e a caça ilegal. Após ser declarada extinta na natureza, um ambicioso projeto de conservação envolveu a reprodução em cativeiro por instituições internacionais e parceiros brasileiros. Recentemente, a espécie está sendo reintroduzida em seu habitat original na Caatinga baiana, com monitoramento contínuo e proteção da área, representando um dos maiores sucessos de conservação de aves no Brasil.
+            </p>
+        </section>
+
+        <section>
+            <section class="galeria">
+                <img id="imggrande" class="imggrande" src="/img/ararinhasazuis/img01.webp"
+                    alt="Imagem destacada da Ararinha-azul" />
+                <div class="imgpequenas">
+                    <img src="/img/ararinhasazuis/img01.webp" alt="Ararinha-azul 1" />
+                    <img src="/img/ararinhasazuis/img02.webp" alt="Ararinha-azul 2" />
+                    <img src="/img/ararinhasazuis/img03.webp" alt="Ararinha-azul 3" />
+                    <img src="/img/ararinhasazuis/img04.webp" alt="Ararinha-azul 4" />
+                    <img src="/img/ararinhasazuis/img05.webp" alt="Ararinha-azul 5" />
+                    <img src="/img/ararinhasazuis/img06.webp" alt="Ararinha-azul 6" />
+                    <img src="/img/ararinhasazuis/img07.webp" alt="Ararinha-azul 7" />
+                    <img src="/img/ararinhasazuis/img08.webp" alt="Ararinha-azul 8" />
+                    <img src="/img/ararinhasazuis/img09.webp" alt="Ararinha-azul 9" />
+                </div>
+            </section>
+        </section>
+
+        <script>
+            const featured = document.getElementById("imggrande");
+            const thumbs = document.querySelectorAll(".imgpequenas img");
+
+            thumbs.forEach((thumb) => {
+                thumb.addEventListener("click", () => {
+                    featured.src = thumb.src.replace(/\/160\/120/, "/800/600"); // Adapte se suas imagens tiverem outro padrão
+                    featured.scrollIntoView({ behavior: "smooth", block: "center" });
+                });
+            });
+        </script>
+
+    </main>
+    <footer>
+        <p>Fonte: <a href="https://nationalgeographicbrasil.com/animais/2022/07/ararinha-azul-ja-comecou-processo-de-reintroducao-na-caatinga" target="_blank">National Geographic Brasil</a> | <a href="https://www.icmbio.gov.br/portal/especies-ameacadas/lista-nacional-por-categoria/220-fauna-ameacada/8695-aves-psittacidae-cyanopsitta-spixii-ararinha-azul" target="_blank">ICMBio</a> </p>
+        <p>Links dos projetos de conservação podem ser adicionados aqui.</p>
+    </footer>
+</body>
+
+</html>

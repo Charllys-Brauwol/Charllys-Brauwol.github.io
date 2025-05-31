@@ -1,0 +1,267 @@
+body {
+    font-family: system-ui, sans-serif;
+    margin: 1rem;
+    padding: 1rem;
+    background: #f6f6f6;
+}
+
+section.oferecemos {
+    max-width: 100%;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 0.5rem;
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
+    align-items: center;
+}
+
+.texto-oferecemos h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.texto-oferecemos p {
+    color: #555;
+}
+
+.grid-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.card-link {
+    text-decoration: none;
+}
+
+.card {
+    width: 250px;
+    height: 250px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+}
+
+.card:hover {
+    transform: rotateY(180deg);
+}
+
+.card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backface-visibility: hidden;
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.card-face p {
+    font-size: 15px;
+}
+
+.card-front {
+    background: #33b5b5;
+    flex-direction: column;
+}
+
+.card-front img {
+    width: 220px;
+    height: 190px;
+    margin-bottom: 0.5rem;
+    border-radius: 0.5rem;
+}
+
+.card-back {
+    background: #238989;
+    transform: rotateY(180deg);
+    padding: 0.5rem;
+}
+
+.break {
+    flex-basis: 100%;
+    height: 0;
+}
+
+@media (max-width: 768px) {
+    section.oferecemos {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .grid-cards {
+        justify-content: center;
+    }
+}
+
+/* -- NOVOS ESTILOS PARA A SEÇÃO DE AVES DA CAATINGA -- */
+
+/* Variáveis CSS (bom para manter aqui ou em um arquivo de variáveis se tiver muitos) */
+:root {
+    /* Mantenha suas variáveis existentes, se houver, e adicione estas */
+    --cor-fundo-secao-aves: #f8f8f8; /* Fundo para as sub-seções */
+    --cor-texto-aves-principal: #333;
+    --cor-destaque-aves: #4CAF50; /* Verde Caatinga */
+    --cor-destaque-aves-claro: #e8f5e9;
+    --cor-criticamente-perigo: #d32f2f; /* Vermelho escuro */
+    --cor-em-perigo: #fbc02d; /* Amarelo escuro */
+    --cor-vulneravel: #1976d2; /* Azul escuro */
+    --sombra-leve-aves: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Importação de fontes (verifique se já não está importando na sua head ou em outro lugar) */
+/* Se não estiver importando no HTML ou em outro CSS, adicione esta linha no TOPO do seu style.css */
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600&display=swap');
+
+
+/* Estilos para a seção principal das aves da Caatinga */
+.secao-aves-caatinga {
+    /* Use a largura máxima que você desejar para esta seção */
+    max-width: 100%; /* ou 900px, dependendo do seu layout geral */
+    margin: 2rem auto; /* Adapte a margem superior/inferior se necessário */
+    padding: 0 1rem; /* Adapte o padding lateral para combinar com seu `body` */
+    /* Remove background, border-radius e display: grid pois esta é uma seção que virá após "oferecemos" */
+}
+
+/* Título principal da seção das aves */
+.secao-aves-caatinga .titulo-secao {
+    background-color: var(--cor-destaque-aves);
+    color: white;
+    padding: 1em 0;
+    text-align: center;
+    box-shadow: var(--sombra-leve-aves);
+    margin-bottom: 2em;
+    border-radius: 0.5rem; /* Ajustado para combinar com seus outros elementos */
+    font-family: 'Merriweather', serif;
+    font-size: 2em;
+}
+
+/* Estilo para cada sub-seção (Criticamente em Perigo, Em Perigo, etc.) */
+.secao-aves-caatinga section {
+    background-color: #fff; /* Fundo branco para as seções de categoria */
+    padding: 2em;
+    margin-bottom: 2em;
+    border-radius: 0.5rem; /* Ajustado para combinar com seus outros elementos */
+    box-shadow: var(--sombra-leve-aves);
+}
+
+/* Títulos das categorias (Criticamente em Perigo, Em Perigo, Vulnerável) */
+.secao-aves-caatinga h2 {
+    font-family: 'Merriweather', serif;
+    color: var(--cor-destaque-aves);
+    border-bottom: 2px solid var(--cor-destaque-aves-claro);
+    padding-bottom: 0.5em;
+    margin-top: 0;
+}
+
+/* Lista de aves */
+.secao-aves-caatinga ul {
+    list-style: none;
+    padding: 0;
+}
+
+/* Item individual da ave */
+.secao-aves-caatinga li {
+    background-color: var(--cor-fundo-secao-aves); /* Usando a variável de fundo de seção */
+    padding: 0.8em 1.2em;
+    margin-bottom: 0.6em;
+    border-radius: 0.3rem; /* Levemente menor para os itens da lista */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease-in-out;
+    flex-wrap: wrap; /* Para garantir que o nome científico e a categoria quebrem a linha se necessário em telas pequenas */
+}
+
+.secao-aves-caatinga li:hover {
+    transform: translateY(-3px);
+}
+
+.secao-aves-caatinga .especie-nome {
+    font-weight: 600;
+    color: var(--cor-texto-aves-principal);
+    flex-grow: 1;
+}
+
+.secao-aves-caatinga .nome-cientifico {
+    font-style: italic;
+    font-size: 0.9em;
+    color: #666;
+    margin-left: 10px;
+    white-space: nowrap; /* Tenta manter o nome científico na mesma linha */
+}
+
+.secao-aves-caatinga .categoria {
+    font-size: 0.8em;
+    font-weight: 700;
+    padding: 0.4em 0.8em;
+    border-radius: 4px;
+    color: white;
+    text-transform: uppercase;
+    margin-left: 10px; /* Espaçamento da categoria */
+}
+
+.secao-aves-caatinga .criticamente-em-perigo {
+    background-color: var(--cor-criticamente-perigo);
+}
+
+.secao-aves-caatinga .em-perigo {
+    background-color: var(--cor-em-perigo);
+}
+
+.secao-aves-caatinga .vulneravel {
+    background-color: var(--cor-vulneravel);
+}
+
+/* Estilo para a informação de citação/rodapé da seção */
+.secao-aves-caatinga .info-fontes {
+    text-align: center;
+    padding: 1em 0;
+    margin-top: 1em;
+    font-size: 0.85em;
+    color: #666;
+}
+
+/* Media query para responsividade dos itens da lista de aves em telas pequenas */
+@media (max-width: 500px) {
+    .secao-aves-caatinga li {
+        flex-direction: column; /* Empilha os elementos em telas pequenas */
+        align-items: flex-start;
+    }
+    .secao-aves-caatinga .nome-cientifico {
+        margin-left: 0;
+        margin-top: 5px; /* Espaçamento entre nome comum e científico */
+    }
+    .secao-aves-caatinga .categoria {
+        margin-left: 0;
+        margin-top: 8px; /* Espaçamento da categoria */
+    }
+}/* Adicione isso ao seu style.css */
+
+/* Estilos para o link que envolve o item da lista de aves */
+.secao-aves-caatinga .lista-link-ave {
+    text-decoration: none; /* Remove sublinhado padrão do link */
+    color: inherit; /* Herda a cor do texto do item da lista */
+    display: flex; /* Mantém o layout flexível dentro do link */
+    align-items: center;
+    justify-content: space-between;
+    width: 100%; /* Garante que o link ocupe toda a largura do <li> */
+    /* Você pode adicionar um hover aqui se quiser um feedback visual ao passar o mouse */
+    transition: background-color 0.2s ease-in-out;
+}
+
+/* Opcional: Adicione um efeito hover ao passar o mouse sobre o link do item da lista */
+.secao-aves-caatinga li:hover .lista-link-ave {
+    background-color: rgba(0, 0, 0, 0.03); /* Um leve escurecimento no fundo do link */
+    border-radius: 5px; /* Para manter os cantos arredondados do item */
+}

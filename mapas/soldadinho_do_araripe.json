@@ -1,0 +1,24 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Habitat do Soldadinho-do-araripe (Chapada do Araripe)",
+        "description": "Área aproximada de ocorrência do Soldadinho-do-araripe, concentrada nos brejos de altitude da Chapada do Araripe."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-39.50, -7.00],
+            [-39.50, -7.80],
+            [-40.50, -7.80],
+            [-40.50, -7.00],
+            [-39.50, -7.00]
+          ]
+        ]
+      }
+    }
+  ]
+}
